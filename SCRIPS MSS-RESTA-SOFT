@@ -1,0 +1,49 @@
+5432
+postgres
+postgres
+108.175.4.227
+
+
+
+
+sudo systemctl status apache2.service
+
+
+
+CREATE TABLE mss_users_roles(
+   role_id SERIAL NOT NULL,
+   name_role VARCHAR(255) NOT NULL,
+   PRIMARY KEY(role_id)
+);
+
+CREATE TABLE mss_users(
+   user_id SERIAL NOT NULL,
+   role_id INT,
+   name VARCHAR(255) NULL,
+   fist_lastname VARCHAR(255) NULL,
+   second_lastname VARCHAR(255) NULL,
+   phone VARCHAR(255) NULL,
+   address VARCHAR(255) NULL,
+   email VARCHAR(255) NULL,
+   password VARCHAR(255) NULL,
+   rfc VARCHAR(255) NULL,
+   status BOOLEAN NULL,
+   PRIMARY KEY(user_id),
+   CONSTRAINT fk_role
+      FOREIGN KEY(role_id) 
+	  REFERENCES mss_users_roles(role_id)
+
+);
+
+CREATE TABLE mss_users_roles_function(
+   role_function_id SERIAL NOT NULL,
+   role_id INT,
+   permission VARCHAR(255) NULL,
+   description VARCHAR(255) NULL,
+   PRIMARY KEY(role_function_id),
+   CONSTRAINT fk_role
+      FOREIGN KEY(role_id) 
+	  REFERENCES mss_users_roles(role_id)
+
+);
+
